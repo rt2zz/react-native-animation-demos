@@ -10,6 +10,7 @@ import React, {
 } from 'react-native'
 
 import {Motion, spring} from 'react-motion'
+import Watermark from './Watermark'
 
 class DemoLayoutAnimation extends Component {
 
@@ -28,12 +29,10 @@ class DemoLayoutAnimation extends Component {
   }
 
   onPress = (e) => {
-    LayoutAnimation.spring()
     this.moveTo(e.nativeEvent.locationX, e.nativeEvent.locationY)
   };
 
   moveTo = (x, y) => {
-    LayoutAnimation.spring()
     this.setState({left: x, top: y})
   };
 
@@ -41,10 +40,14 @@ class DemoLayoutAnimation extends Component {
     let {left, top} = this.state
     return (
       <View {...this._panResponder.panHandlers} style={styles.container}>
-        <TouchableOpacity activeOpacity={1} onPress={this.onPress} style={styles.container}>
-          <Motion style={{left: spring(left), top: spring(top)}}>{interpolated =>
-            <View style={[styles.block, {top: interpolated.top, left: interpolated.left}]} />
+        <Watermark name="React Motion" />
+        <TouchableOpacity activeOpacity={1} onPress={this.onPress} style={styles.touchContainer}>
+
+          <Motion style={{left: spring(left), top: spring(top)}}>{
+              (interpolated) =>
+                <View style={[styles.block, {top: interpolated.top, left: interpolated.left}]} />
           }</Motion>
+
         </TouchableOpacity>
       </View>
     )
@@ -54,6 +57,7 @@ class DemoLayoutAnimation extends Component {
 export default DemoLayoutAnimation
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: 'red'},
+  container: {flex: 1, backgroundColor: 'white'},
+  touchContainer: {flex: 1, backgroundColor: 'transparent'},
   block: {position: 'absolute', width: 50, height: 50, backgroundColor: 'purple'},
 })

@@ -9,6 +9,8 @@ import React, {
   View,
 } from 'react-native'
 
+import Watermark from './Watermark'
+
 class DemoLayoutAnimation extends Component {
 
   state = {
@@ -38,7 +40,8 @@ class DemoLayoutAnimation extends Component {
   render() {
     return (
       <View {...this._panResponder.panHandlers} style={styles.container}>
-        <TouchableOpacity activeOpacity={1} onPress={this.onPress} style={styles.container}>
+        <Watermark name="Layout Animation" />
+        <TouchableOpacity activeOpacity={1} onPress={this.onPress} style={styles.touchContainer}>
           <View style={[styles.block, {top: this.state.top, left: this.state.left}]} />
         </TouchableOpacity>
       </View>
@@ -49,6 +52,7 @@ class DemoLayoutAnimation extends Component {
 export default DemoLayoutAnimation
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: 'red'},
+  container: {flex: 1, backgroundColor: 'white'},
+  touchContainer: {flex: 1, backgroundColor: 'transparent'},
   block: {position: 'absolute', width: 50, height: 50, backgroundColor: 'purple'},
 })
